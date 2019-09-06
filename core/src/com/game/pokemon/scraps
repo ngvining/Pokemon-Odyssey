@@ -1,0 +1,226 @@
+//Get Collision for tile below the Entity and sends it to the Controller Class to determine collision using Tile Properties
+    public boolean getCollisionDown () {
+
+        TiledMapTileLayer collisionlayer1 = (TiledMapTileLayer) map.getLayers().get("Tile Layer 1");
+        TiledMapTileLayer collisionlayer2 = (TiledMapTileLayer) map.getLayers().get("Tile Layer 2");
+        TiledMapTileLayer collisionlayer3 = (TiledMapTileLayer) map.getLayers().get("Tile Layer 3");
+
+        Object collidelayer3 = new Object();
+        Object collidelayer2 = new Object();
+        Object collidelayer1 = collisionlayer1.getCell(player.getEntityX(), player.getEntityY() - 1).getTile().getProperties().get("collide");
+
+        try {
+            collidelayer3 = collisionlayer3.getCell(player.getEntityX(), player.getEntityY() - 1).getTile().getProperties().get("collide");
+        } catch (Exception e) {
+            return collidelayer3 == null;
+        }
+
+        try {
+            collidelayer2 = collisionlayer2.getCell(player.getEntityX(), player.getEntityY() - 1).getTile().getProperties().get("collide");
+        } catch (Exception e) {
+            return collidelayer2 == null;
+        }
+
+
+        if (collidelayer1 != null || collidelayer2 != null || collidelayer3  != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //Get Collision for tile above the Entity and sends it to the Controller Class to determine collision using Tile Properties
+    public Object getCollisionUp () {
+        TiledMapTileLayer collisionlayer1 = (TiledMapTileLayer)map.getLayers().get("Tile Layer 1");
+        return collisionlayer1.getCell(player.getEntityX(), player.getEntityY()+1).getTile().getProperties().get("collide");
+    }
+
+    //Get Collision for tile left of the Entity and sends it to the Controller Class to determine collision using Tile Properties
+    public Object getCollisionLeft () {
+        TiledMapTileLayer collisionlayer1 = (TiledMapTileLayer)map.getLayers().get("Tile Layer 1");
+        return collisionlayer1.getCell(player.getEntityX()-1, player.getEntityY()).getTile().getProperties().get("collide");
+    }
+
+    //Get Collision for tile right of the Entity and sends it to the Controller Class to determine collision using Tile Properties
+    public Object getCollisionRight () {
+        TiledMapTileLayer collisionlayer1 = (TiledMapTileLayer)map.getLayers().get("Tile Layer 1");
+        return collisionlayer1.getCell(player.getEntityX()+1, player.getEntityY()).getTile().getProperties().get("collide");
+    }
+
+
+
+
+
+        //Object collidelayer2 = collisionlayer2.getCell(getEntityX(), getEntityY() - 1).getTile().getProperties().get("collide");
+
+
+
+    public class getLastKey {}
+
+    public boolean isMovingUp() {
+
+        if (movingUP && !player.getCollisionUp() && !player.getCollisionUp1() && !player.getCollisionUp2())
+        player.move(0, Settings.TILE_SIZE);
+
+        return false;
+    }
+
+    public boolean isMovingRight() {
+
+        if (movingRIGHT && !player.getCollisionRight() && !player.getCollisionRight1() && !player.getCollisionRight2())
+        player.move(Settings.TILE_SIZE, 0);
+
+        return false;
+    }
+
+    public boolean isMovingLeft() {
+        return false;
+    }
+
+    public boolean isMovingDown() {
+        return false;
+    }
+
+
+//Movement
+        if (controller.movingUP && !player.getCollisionUp() && !player.getCollisionUp1() && !player.getCollisionUp2())
+            player.move(0, Settings.TILE_SIZE);
+        if (controller.movingRIGHT && !player.getCollisionRight() && !player.getCollisionRight1() && !player.getCollisionRight2())
+            player.move(Settings.TILE_SIZE, 0);
+        if (controller.movingLEFT && !player.getCollisionLeft() && !player.getCollisionLeft1() && !player.getCollisionLeft2())
+            player.move(-Settings.TILE_SIZE, 0);
+        if (controller.movingDOWN && !player.getCollisionDown() && !player.getCollisionDown1() && !player.getCollisionDown2())
+            player.move(0, -Settings.TILE_SIZE);
+
+
+
+//Movement
+        if (controller.movingUP && !getCollisionUp() && !getCollisionUp1() && !getCollisionUp2())
+            move(0, Settings.TILE_SIZE);
+        if (controller.movingRIGHT && !getCollisionRight() && !getCollisionRight1() && !getCollisionRight2())
+            move(Settings.TILE_SIZE, 0);
+        if (controller.movingLEFT && !getCollisionLeft() && !getCollisionLeft1() && !getCollisionLeft2())
+            move(-Settings.TILE_SIZE, 0);
+        if (controller.movingDOWN && !getCollisionDown() && !getCollisionDown1() && !getCollisionDown2())
+            move(0, -Settings.TILE_SIZE);
+
+/*if (keycode == Input.Keys.LEFT && !player.getCollisionLeft() && !player.getCollisionLeft1() && !player.getCollisionLeft2())
+            player.move(-Settings.TILE_SIZE, 0);
+        if (keycode == Input.Keys.RIGHT && !player.getCollisionRight() && !player.getCollisionRight1() && !player.getCollisionRight2())
+            player.move(Settings.TILE_SIZE, 0);
+        if (keycode == Input.Keys.DOWN && !player.getCollisionDown() && !player.getCollisionDown1() && !player.getCollisionDown2())
+            player.move(0, -Settings.TILE_SIZE);
+        if (keycode == Input.Keys.UP && !player.getCollisionUp() && !player.getCollisionUp1() && !player.getCollisionUp2())
+            player.move(0, Settings.TILE_SIZE);*/
+
+
+spritesheet = new Texture("res/Ethan Walking sprite.png");
+        TextureRegion[][] tmpframes = TextureRegion.split(spritesheet, 64, 64);
+        animationFrames = new TextureRegion[16];
+        int index = 0;
+
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                animationFrames[index++] = tmpframes[i][j];
+            }
+        }
+
+
+
+        //walkAnimation = new Animation<TextureRegion>(1f/4f, animationFrames);
+
+        /*if (player.direction == Entity.PLAYER_DIRECTION.NORTH)
+            walkAnimation = walkUpAnimation;*/
+
+
+//        batch.draw((TextureRegion) anim.getKeyFrame(elapsedTime, true), player.getFinalx()-15, player.getFinaly());
+
+
+
+
+
+
+        spritesheet = new Texture("res/Ethan Walking sprite.png");
+        TextureRegion[][] tmpframes = TextureRegion.split(spritesheet, 64, 64);
+        animationFrames = new TextureRegion[16];
+        int index = 0;
+
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                animationFrames[index++] = tmpframes[i][j];
+            }
+        }
+
+        anim = new Animation<TextureRegion>(1f/4f, animationFrames);
+
+
+/*//Movement
+        if (controller.isMovingUp() && !player.getCollisionUp() && !player.getCollisionUp1() && !player.getCollisionUp2())
+            player.move(0, Settings.TILE_SIZE);
+        if (controller.isMovingRight() && !player.getCollisionRight() && !player.getCollisionRight1() && !player.getCollisionRight2())
+            player.move(Settings.TILE_SIZE, 0);
+        if (controller.isMovingLeft() && !player.getCollisionLeft() && !player.getCollisionLeft1() && !player.getCollisionLeft2())
+            player.move(-Settings.TILE_SIZE, 0);
+        if (controller.isMovingDown() && !player.getCollisionDown() && !player.getCollisionDown1() && !player.getCollisionDown2())
+            player.move(0, -Settings.TILE_SIZE);*/
+
+//animation = new Animation<TextureRegion>(1f/4f, animController.animationFrames);
+
+
+
+
+/*animationFrames = new TextureRegion[16];
+        int index = 0;
+
+        for (int k = 0; k < 4; k++){
+            for (int l = 0; l < 4; l++){
+                animationFrames[index++] = tmpframes[k][l];
+            }
+        }
+        walkAnimation = new Animation<TextureRegion>(1f/4f, animationFrames);*/
+
+
+//Assigns Entity Direction
+    public enum PLAYER_DIRECTION {
+        NORTH,
+        SOUTH,
+        EAST,
+        WEST;
+    }
+
+    /*public PLAYER_DIRECTION getDirection() {
+
+        if (controller.keyDown(Input.Keys.LEFT))
+            direction = PLAYER_DIRECTION.WEST;
+        if (controller.keyDown(Input.Keys.RIGHT))
+            direction = PLAYER_DIRECTION.EAST;
+
+        return direction;
+    }*/
+
+
+        /*if (controller.isMovingUp())
+            animation = walkUpAnimation;
+        else if (controller.isMovingRight())
+            animation = walkRightAnimation;
+        else
+            animation = walkDownAnimation;
+*/
+
+
+
+
+        /*if (player.getDirection() == Entity.PLAYER_DIRECTION.EAST) {
+            System.out.println("x");}
+        else {
+            System.out.println("y");
+        }*/
+
+
+        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+            game.setScreen(new QuestScreen(game, this));
+        }
+
+
+
+

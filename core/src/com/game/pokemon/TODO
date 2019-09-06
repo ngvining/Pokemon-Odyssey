@@ -1,0 +1,19 @@
+
+TODO -- Create Menu Overlay --- Pokedex, Pokemon, Quests, Bag, Trainer Card, Save Game, Options, Exit
+TODO -- Create Backpack Screen
+TODO -- Create Character Customization Screen
+TODO -- Create Quest Screen
+TODO -- Player Direction
+TODO -- Player Animation
+TODO -- Continuous Player movement
+TODO -- Render one Tile Layer over Entity
+TODO -- maploader
+TODO -- Refactor collision
+ TODO finish player direction
+
+
+
+
+TODO -- Finish Main Menu --- New Game, Load Game, Options, Quit
+ -- Started on Buttons. Need to be Placed in correct positions amd
+    reskinned to the correct skin.
